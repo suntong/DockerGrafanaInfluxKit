@@ -9,7 +9,10 @@ post() {
 }
 
 if [ ! -f "/var/lib/grafana/.init" ]; then
-    exec /run.sh $@ &
+    # start grafana in background
+    ./run.sh $@ &
+    # and remember the process id to kill it after installing datasources
+    runpid=$!
 
     until curl -s "$url/api/datasources" 2> /dev/null; do
         sleep 1
@@ -21,7 +24,9 @@ if [ ! -f "/var/lib/grafana/.init" ]; then
 
     touch "/var/lib/grafana/.init"
 
-    kill $(pgrep grafana)
+    # kill grafana process and wait till exit 1
+    kill $runpid &
+    wait
 fi
 
 exec /run.sh $@
