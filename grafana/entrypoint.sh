@@ -10,7 +10,7 @@ post() {
 
 if [ ! -f "/var/lib/grafana/.init" ]; then
     # start grafana in background
-    ./run.sh $@ &
+    /run.sh $@ &
     # and remember the process id to kill it after installing datasources
     runpid=$!
 
