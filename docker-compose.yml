@@ -9,6 +9,7 @@ services:
       - '8086:8086'
     volumes:
       - influxdb_data:/var/lib/influxdb
+      - ./influxdb/influxdb.conf:/etc/influxdb/influxdb.conf
   grafana:
     build: grafana
     container_name: grafana
