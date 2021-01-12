@@ -1,4 +1,4 @@
-FROM grafana/grafana:6.6.2
+FROM grafana/grafana
 #RUN apt-get update && apt-get install -y curl gettext-base && rm -rf /var/lib/apt/lists/*
 WORKDIR /etc/grafana
 COPY datasources ./datasources
